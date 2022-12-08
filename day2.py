@@ -32,7 +32,7 @@ def get_shape_score(my_choice):
 
 
 def get_appropriate_action(opponent, outcome):
-    if outcome == "win":
+    if outcome == "Z":
         if opponent == "A":
             return "B"
         if opponent == "B":
@@ -40,7 +40,7 @@ def get_appropriate_action(opponent, outcome):
         if opponent == "C":
             return "A"
 
-    if outcome == "lose":
+    if outcome == "X":
         if opponent == "A":
             return "C"
         if opponent == "B":
@@ -48,8 +48,7 @@ def get_appropriate_action(opponent, outcome):
         if opponent == "C":
             return "B"
 
-    if outcome == "draw":
-        return opponent
+    return opponent
 
 
 def part1(actions):
@@ -65,13 +64,7 @@ def part1(actions):
 def part2(actions):
     result = 0
     for action in actions:
-        outcome = "win"
-        if action[1] == "X":
-            outcome = "lose"
-        elif action[1] == "Y":
-            outcome = "draw"
-
-        me = get_appropriate_action(action[0], outcome)
+        me = get_appropriate_action(action[0], action[1])
         outcome_score = scores[action[0] + me]
         result +=  outcome_score + shape_scores[me]
 
